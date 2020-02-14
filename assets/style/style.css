@@ -1,0 +1,134 @@
+@import "fonts.css";
+*{
+    margin: 0;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 600;
+}
+body{
+    background-color: #d8d8d8;
+    font-size: 16px;
+    color: #252525;
+}
+a{
+    text-decoration: none;
+}
+input{
+    outline: none;
+    width: 400px;
+    height: 24px;
+    border: none;
+    border-radius: 5px;
+}
+.container{
+    max-width: 900px;
+    margin: 0 auto;
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+/*----------------------------------------------------------------------------------------------------------*/
+header{
+    background-color: #252525;
+    color: #f5f5f7;
+}
+.header .container{
+    padding:18px 0 10px 0;
+}
+.sizeBasket{
+    width: 80px;
+}
+.Basket{
+    position: absolute;
+}
+.counter{
+    position: relative;
+    background-color:#ff8b38;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transform: translate(51px, -3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#counter{
+    font-size: 9px;
+}
+.amountText{
+    padding-top: 8px;
+    font-size: 9px;
+
+}
+#amount{
+    font-size: 9px;
+}
+/*-----------------------------------------------------------------------*/
+.section .container{
+    padding-top: 20px;
+}
+.products{
+    padding: 0 5px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-size: 12px;
+}
+#sort{
+    color: #252525;
+}
+.SortTextSize{
+    font-weight: 400;
+    width: 110px;
+}
+#changeValue{
+    color: #252525;
+    margin-left: 660px;
+}
+/*-------------------------------------------------------------------------*/
+.content{
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 15px;
+    margin: 20px 0 20px 0;
+}
+.img{
+    height: 120px;
+    width: 175px;
+    object-fit: contain;
+}
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.textWidth{
+    padding-top: 10px;
+    width: 377px;
+}
+.characteristic{
+    padding-top: 20px;
+    font-size: 12px;
+}
+.contentPrice{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff8b38;
+    border-radius: 5px;
+    color: #ffffff;
+    min-width: 270px;
+    height: 35px;
+}
+.active{
+    background-color: #d8d8d8;
+}
+.NoResult{
+    padding-top: 50px;
+   text-align: center;
+}
