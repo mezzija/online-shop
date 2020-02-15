@@ -6,11 +6,11 @@
 
     class Products{
         constructor({
-            products,
-            sectionEl,
-            currentSortDirection,
-            basket,
-        })  {
+                        products,
+                        sectionEl,
+                        currentSortDirection,
+                        basket,
+                    })  {
             this.defaultData = [...products];
             this.currentData = [...products];
             this.sectionEl=sectionEl;
@@ -92,7 +92,7 @@
     class Basket{
         constructor({currentBasket,products} ){
             this.cBasket=currentBasket ;
-            this.products=products;
+            this.products=[...products];
         }
         addToBasket(productID){
             return event=>{
@@ -115,37 +115,41 @@
             const amountEl=document.getElementById('amount');
             const counterEl=document.getElementById('counter');
             const amount=this.cBasket.reduce((acc,productID)=>{
-               const product=this.products.find(item=>item.id===productID);
-               return acc+product.price.value;
+                const product=this.products.find(item=>item.id===productID);
+                return acc+product.price.value;
             },0);
             counterEl.textContent=this.cBasket.length;
             amountEl.textContent=`${viewNumber(amount)}`;
 
         }
     }
-
     class Currency{
-        constructor({products,currencyBY,productsClass}){
-            this.data=products;
+        constructor({data,currencyBY,productsClass,basket}){
+            this.data=[...data];
             this.BY=currencyBY;
             this.products=productsClass;
+            this.basket=basket;
         }
         change(event){
             event.preventDefault();
+
             if(changeValue.textContent==='USD'){
                 changeValue.textContent='BYN';
-                this.data=this.data.map(item=>{
-                    item.price.value*=this.BY.Cur_OfficialRate;
-                    item.price.currency='BYN';
-                });
-                products.render();
+                for(let i=0;i<this.data.length;i++){
+                    this.data[i].price.value*=this.BY.Cur_OfficialRate;
+                    this.data[i].price.currency='BYN';
+                }
+                console.log(this.data);
+                this.products.render();
+                this.basket.renderBasket();
             }else{
-                changeValue.textContent='Usd';
-                this.data=this.data.map(item=>{
-                    item.price.value/=this.BY.Cur_OfficialRate;
-                    item.price.currency='USD';
-                });
-                products.render();
+                changeValue.textContent='USD';
+                for(let i=0;i<this.data.length;i++){
+                    this.data[i].price.value=this.data[i].price.value/this.BY.Cur_OfficialRate;
+                    this.data[i].price.currency='USD';
+                }
+                this.products.render();
+                this.basket.renderBasket();
             }
         }
     }
@@ -185,11 +189,12 @@
         basket:basket,
     });
     const changeVal=new Currency({
+        data:serverData,
         productsClass: products,
         currencyBY:currencyBY,
-        products:serverData,
+        basket:basket,
     });
-    changeValue.addEventListener("click",changeVal.change.bind(products));
+    changeValue.addEventListener("click",changeVal.change.bind(changeVal));
     search.addEventListener('input',products.search.bind(products));
     sort.addEventListener('click',products.sort.bind(products));
     products.render();
