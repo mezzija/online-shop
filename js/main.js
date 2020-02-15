@@ -3,7 +3,6 @@
         const regDelimiter=new RegExp(/\B(?=(\d{3})+(?!\d))/g );
         return num.toFixed(2).replace(regDelimiter,',');
     };
-
     class Products{
         constructor({
                         products,
@@ -114,6 +113,7 @@
         renderBasket(){
             const amountEl=document.getElementById('amount');
             const counterEl=document.getElementById('counter');
+            const signCurrency=document.getElementById('currency');
             const amount=this.cBasket.reduce((acc,productID)=>{
                 const product=this.products.find(item=>item.id===productID);
                 return acc+product.price.value;
@@ -139,7 +139,6 @@
                     this.data[i].price.value*=this.BY.Cur_OfficialRate;
                     this.data[i].price.currency='BYN';
                 }
-                console.log(this.data);
                 this.products.render();
                 this.basket.renderBasket();
             }else{
@@ -164,7 +163,7 @@
         .then(response=>response.json())
         .then(data=>data)
         .catch(error=>console.log('error'));
-    console.log(currencyBY);
+
 
     const sectionEl=document.getElementById('content');
     const sort=document.getElementById('sort');
