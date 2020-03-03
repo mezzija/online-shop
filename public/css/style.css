@@ -73,6 +73,9 @@ header{
     border-radius: 5px;
     font-size: 12px;
 }
+.title{
+    color: #252525 ;
+}
 #sort{
     color: #252525;
 }
