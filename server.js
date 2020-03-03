@@ -2,7 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.get('/',function (req,res) {
+    res.render('index');
+});
 app.get('/api/products', function (req, res) {
     res.status(200).send([
         {

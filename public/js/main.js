@@ -70,7 +70,7 @@
             <img src=${sortedData[i].imageLink}>
             </div>
             <div class="textWidth">
-            <p>${sortedData[i].title}</p>
+            <a class="title" href="#">${sortedData[i].title}</a>
             <p class="characteristic">${sortedData[i].description}</p>
             </div>
             <div class="contentPrice">
@@ -80,6 +80,8 @@
             
     `;
                 let a=newDiv.querySelector('.button');
+                let title = newDiv.querySelector('.title');
+                title.addEventListener('click',this.renderTitle(sortedData[i].id));
                 a.addEventListener('click',this.basket.addToBasket.call(this.basket,sortedData[i].id));
                 if(this.basket.cBasket.includes(sortedData[i].id)){
                     a.classList.add('active');
@@ -87,6 +89,19 @@
                 }
                 sectionEl.appendChild(newDiv);
             }
+        }
+        renderTitle(ID){
+            return event=>{
+                event.preventDefault();
+                this.sectionEl.innerHTML='';
+                let data=this.defaultData.find(item=>item.id===ID);
+                let newDiv=document.createElement('div');
+                newDiv.classList.add('content');
+                newDiv.classList.add('row');
+                window.history.pushState({ID},'title',data.title);
+
+            };
+
         }
     }
     class Basket{
@@ -164,7 +179,7 @@
         .then(response=>response.json())
         .then(data=>data)
         .catch(error=>console.log('error'));
-    console.log(currencyBY);
+
 
     const sectionEl=document.getElementById('content');
     const sort=document.getElementById('sort');
