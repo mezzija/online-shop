@@ -69,7 +69,7 @@
             <img src=${sortedData[i].imageLink}>
             </div>
             <div class="textWidth">
-            <a class="title" href="#">${sortedData[i].title}</a>
+            <a class="title" href="sortedData[i].title">${sortedData[i].title}</a>
             <p class="characteristic">${sortedData[i].description}</p>
             </div>
             <div class="contentPrice">
@@ -88,6 +88,8 @@
                 }
                 sectionEl.appendChild(newDiv);
             }
+            window.history.pushState('main','main','/');
+
         }
         renderTitle(ID){
             return event=>{
@@ -97,7 +99,7 @@
                 let newDiv=document.createElement('div');
                 newDiv.classList.add('content');
                 newDiv.classList.add('row');
-                window.history.pushState({ID},'title',data.title);
+                window.history.pushState({ID}, null,data.id);
 
             };
 
@@ -167,6 +169,8 @@
             }
         }
     }
+
+
     const serverData= await fetch('http://localhost:3000/api/products')
         .then(response=>response.json())
         .then(data=>data)
@@ -178,7 +182,6 @@
         .then(response=>response.json())
         .then(data=>data)
         .catch(error=>console.log('error'));
-
 
     const sectionEl=document.getElementById('content');
     const sort=document.getElementById('sort');
@@ -212,5 +215,12 @@
     search.addEventListener('input',products.search.bind(products));
     sort.addEventListener('click',products.sort.bind(products));
     products.render();
+    window.addEventListener('popstate',event=>{
+
+        if(event.state==='main'){
+            products.render();
+        }
+    },false);
+
 
 })();
